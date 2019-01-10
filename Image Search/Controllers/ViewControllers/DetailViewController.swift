@@ -7,19 +7,20 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var image: UIImage! = nil
+    var imageUrl: URL! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let image = self.image else { self.navigationController?.popViewController(animated: true); return }
+        guard let imageUrl = self.imageUrl else { self.navigationController?.popViewController(animated: true); return }
         
-        self.imageView.image = image
+        self.imageView.kf.setImage(with: self.imageUrl)
         
     }
     

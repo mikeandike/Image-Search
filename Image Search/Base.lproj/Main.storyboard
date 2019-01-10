@@ -45,7 +45,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wU1-IS-VQi">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wU1-IS-VQi">
                                                     <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="wU1-IS-VQi" secondAttribute="height" id="Hz7-Ad-Ke6"/>
@@ -71,15 +71,14 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="7D1-sN-3ac" secondAttribute="bottom" id="5ja-wX-6zi"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="KhN-hP-R4c"/>
+                            <constraint firstAttribute="bottom" secondItem="7D1-sN-3ac" secondAttribute="bottom" id="5ja-wX-6zi"/>
+                            <constraint firstItem="XqV-OS-l7y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="KhN-hP-R4c"/>
                             <constraint firstItem="7D1-sN-3ac" firstAttribute="top" secondItem="XqV-OS-l7y" secondAttribute="bottom" id="VXa-8A-d2g"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Wrd-KE-RZf"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="7D1-sN-3ac" secondAttribute="trailing" id="lhD-9C-orb"/>
-                            <constraint firstItem="7D1-sN-3ac" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="pcZ-n5-tvk"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="zkj-Ot-FXg"/>
+                            <constraint firstItem="XqV-OS-l7y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Wrd-KE-RZf"/>
+                            <constraint firstAttribute="trailing" secondItem="7D1-sN-3ac" secondAttribute="trailing" id="lhD-9C-orb"/>
+                            <constraint firstItem="7D1-sN-3ac" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pcZ-n5-tvk"/>
+                            <constraint firstItem="XqV-OS-l7y" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="zkj-Ot-FXg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -120,18 +119,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJr-8F-ZHx">
-                                <rect key="frame" x="0.0" y="64" width="375" height="375"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="NJr-8F-ZHx" secondAttribute="height" id="CJ0-3z-5Sr"/>
-                                </constraints>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJr-8F-ZHx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="top" secondItem="Ubh-Mt-8ZH" secondAttribute="top" id="r8O-n1-mFW"/>
-                            <constraint firstItem="Ubh-Mt-8ZH" firstAttribute="trailing" secondItem="NJr-8F-ZHx" secondAttribute="trailing" id="sNR-YQ-EFp"/>
-                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="leading" secondItem="Ubh-Mt-8ZH" secondAttribute="leading" id="uTV-Em-dhe"/>
+                            <constraint firstAttribute="bottom" secondItem="NJr-8F-ZHx" secondAttribute="bottom" id="cmA-Zg-1vA"/>
+                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="top" secondItem="lOS-Ce-jO2" secondAttribute="top" constant="64" id="r8O-n1-mFW"/>
+                            <constraint firstAttribute="trailing" secondItem="NJr-8F-ZHx" secondAttribute="trailing" id="sNR-YQ-EFp"/>
+                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="leading" secondItem="lOS-Ce-jO2" secondAttribute="leading" id="uTV-Em-dhe"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ubh-Mt-8ZH"/>
                     </view>

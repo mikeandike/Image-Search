@@ -7,37 +7,44 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ListViewController: UIViewController, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var images: [UIImage] = [UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!, UIImage(named: "logo")!]
+    var imageUrls: [URL] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NetworkController.getImages(forTerm: "Goat") { [weak self] (images) in
+            self?.imageUrls = images
+            self?.collectionView.reloadData()
+        }
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? DetailViewController {
-            vc.image = self.images[self.collectionView.indexPathsForSelectedItems?.first?.item ?? 0]
+            let url = self.imageUrls[self.collectionView.indexPathsForSelectedItems?.first?.item ?? 0]
+            print(url)
+            vc.imageUrl = url
         }
     }
     
     
     //MARK: - Collection View Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.images.count
+        return self.imageUrls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
         
-        let image = self.images[indexPath.row]
-        cell.imageView.image = image
+        let imageUrl = self.imageUrls[indexPath.row]
+        cell.imageView.kf.setImage(with: imageUrl)
         return cell
     }
 
@@ -50,7 +57,7 @@ class ListViewController: UIViewController, UISearchBarDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         defer { collectionView.deselectItem(at: indexPath, animated: true) }
-        guard indexPath.item < self.images.count else { return }
+        guard indexPath.item < self.imageUrls.count else { return }
         self.performSegue(withIdentifier: "listToDetail", sender: nil)
     }
 }
