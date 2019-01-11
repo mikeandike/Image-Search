@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8EEAAE9E98F4A5698861B719 /* Pods_Image_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87B10035B5D11190A3DF8A9C /* Pods_Image_Search.framework */; };
 		9507AA31C9C38EF6B36D3A11 /* Pods_Image_SearchTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DCDE5491A405C42FB40E8B5 /* Pods_Image_SearchTests.framework */; };
+		BD4650FA21E7FFAC00D40FEB /* ImgurItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD4650F921E7FFAC00D40FEB /* ImgurItem.swift */; };
+		BD46CC8921E828F2004F8A48 /* MessageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD46CC8821E828F2004F8A48 /* MessageCollectionViewCell.swift */; };
 		BD49A7C721E6C89A00FEC995 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49A7C621E6C89A00FEC995 /* ListViewController.swift */; };
 		BD49A7CB21E6C94B00FEC995 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49A7CA21E6C94B00FEC995 /* DetailViewController.swift */; };
 		BD49A7CE21E6CB2100FEC995 /* CellProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49A7CD21E6CB2100FEC995 /* CellProtocols.swift */; };
@@ -37,6 +39,8 @@
 		6DCDE5491A405C42FB40E8B5 /* Pods_Image_SearchTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Image_SearchTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87B10035B5D11190A3DF8A9C /* Pods_Image_Search.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Image_Search.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA1DC89862BA4EF76E5C7D7E /* Pods-Image Search.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Image Search.release.xcconfig"; path = "Target Support Files/Pods-Image Search/Pods-Image Search.release.xcconfig"; sourceTree = "<group>"; };
+		BD4650F921E7FFAC00D40FEB /* ImgurItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImgurItem.swift; sourceTree = "<group>"; };
+		BD46CC8821E828F2004F8A48 /* MessageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageCollectionViewCell.swift; sourceTree = "<group>"; };
 		BD49A7C621E6C89A00FEC995 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		BD49A7CA21E6C94B00FEC995 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		BD49A7CD21E6CB2100FEC995 /* CellProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellProtocols.swift; sourceTree = "<group>"; };
@@ -85,6 +89,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BD4650F821E7FF9900D40FEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BD4650F921E7FFAC00D40FEB /* ImgurItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BD49A7C821E6C8A200FEC995 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				BD49A7D021E6CB9100FEC995 /* ImageCollectionViewCell.swift */,
+				BD46CC8821E828F2004F8A48 /* MessageCollectionViewCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -151,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				BDD012B721E6C07B0045987B /* AppDelegate.swift */,
+				BD4650F821E7FF9900D40FEB /* Models */,
 				BD49A7D221E6D35400FEC995 /* Controllers */,
 				BD49A7C821E6C8A200FEC995 /* Views */,
 				BD49A7CC21E6CAED00FEC995 /* Extensions */,
@@ -358,8 +372,10 @@
 				BD49A7CB21E6C94B00FEC995 /* DetailViewController.swift in Sources */,
 				BD49A7D121E6CB9100FEC995 /* ImageCollectionViewCell.swift in Sources */,
 				BD49A7D421E6D37300FEC995 /* NetworkController.swift in Sources */,
+				BD4650FA21E7FFAC00D40FEB /* ImgurItem.swift in Sources */,
 				BD49A7C721E6C89A00FEC995 /* ListViewController.swift in Sources */,
 				BDD012B821E6C07B0045987B /* AppDelegate.swift in Sources */,
+				BD46CC8921E828F2004F8A48 /* MessageCollectionViewCell.swift in Sources */,
 				BD49A7CE21E6CB2100FEC995 /* CellProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +542,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CX48SSGG62;
 				INFOPLIST_FILE = "Image Search/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -545,6 +562,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CX48SSGG62;
 				INFOPLIST_FILE = "Image Search/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -13,14 +13,15 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!
     
-    var imageUrl: URL! = nil
+    var item: ImgurItem! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let imageUrl = self.imageUrl else { self.navigationController?.popViewController(animated: true); return }
+        guard let item = self.item else { self.navigationController?.popViewController(animated: true); return }
         
-        self.imageView.kf.setImage(with: self.imageUrl)
+        self.imageView.kf.setImage(with: item.url)
+        self.title = item.title?.capitalized
         
     }
     

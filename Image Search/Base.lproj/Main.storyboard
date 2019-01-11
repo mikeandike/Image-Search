@@ -18,18 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="XqV-OS-l7y">
-                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="rTa-d4-2pR">
+                                <rect key="frame" x="0.0" y="64" width="375" height="28"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="56" id="Q5m-dO-ONU"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="wI8-YE-m0h"/>
                                 </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="v1W-Zu-6GZ"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5ub-Gb-qkn"/>
                                 </connections>
-                            </searchBar>
+                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7D1-sN-3ac">
-                                <rect key="frame" x="0.0" y="120" width="375" height="547"/>
+                                <rect key="frame" x="0.0" y="92" width="375" height="575"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="FNo-m2-YSu">
                                     <size key="itemSize" width="173" height="173"/>
@@ -63,6 +65,30 @@
                                             <outlet property="imageView" destination="wU1-IS-VQi" id="1xb-rw-NfH"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MessageCollectionViewCell" id="1ed-pk-XJ8" customClass="MessageCollectionViewCell" customModule="Image_Search" customModuleProvider="target">
+                                        <rect key="frame" x="202" y="0.0" width="173" height="173"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="173" height="173"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NZ8-N7-LjV">
+                                                    <rect key="frame" x="20" y="50" width="133" height="20"/>
+                                                    <fontDescription key="fontDescription" name="HiraginoSans-W3" family="Hiragino Sans" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="NZ8-N7-LjV" secondAttribute="trailing" constant="20" id="5U3-T7-cQd"/>
+                                            <constraint firstItem="NZ8-N7-LjV" firstAttribute="leading" secondItem="1ed-pk-XJ8" secondAttribute="leading" constant="20" id="8H0-GZ-bFt"/>
+                                            <constraint firstItem="NZ8-N7-LjV" firstAttribute="top" secondItem="1ed-pk-XJ8" secondAttribute="top" constant="50" id="d12-u1-idV"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="textLabel" destination="NZ8-N7-LjV" id="BA7-gH-nJp"/>
+                                        </connections>
+                                    </collectionViewCell>
                                 </cells>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="7zI-GT-hW3"/>
@@ -71,43 +97,25 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="7D1-sN-3ac" secondAttribute="bottom" id="5ja-wX-6zi"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="64" id="KhN-hP-R4c"/>
-                            <constraint firstItem="7D1-sN-3ac" firstAttribute="top" secondItem="XqV-OS-l7y" secondAttribute="bottom" id="VXa-8A-d2g"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Wrd-KE-RZf"/>
+                            <constraint firstItem="7D1-sN-3ac" firstAttribute="top" secondItem="rTa-d4-2pR" secondAttribute="bottom" id="biT-0l-6yf"/>
+                            <constraint firstItem="rTa-d4-2pR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dy7-cX-0x0"/>
+                            <constraint firstItem="rTa-d4-2pR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jvH-W3-2Mw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rTa-d4-2pR" secondAttribute="trailing" id="lVi-hK-LHV"/>
                             <constraint firstAttribute="trailing" secondItem="7D1-sN-3ac" secondAttribute="trailing" id="lhD-9C-orb"/>
                             <constraint firstItem="7D1-sN-3ac" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pcZ-n5-tvk"/>
-                            <constraint firstItem="XqV-OS-l7y" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="zkj-Ot-FXg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="rX4-5K-8SY"/>
                     <connections>
                         <outlet property="collectionView" destination="7D1-sN-3ac" id="lBe-Q4-TS7"/>
-                        <outlet property="searchBar" destination="XqV-OS-l7y" id="Qcn-hU-2XX"/>
-                        <outlet property="searchDisplayController" destination="gnW-qP-tGr" id="bWz-Bh-mHO"/>
                         <segue destination="SH4-r2-sqC" kind="show" identifier="listToDetail" id="oLa-YF-A6U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="3Uz-Kb-6j4">
-                    <connections>
-                        <outlet property="delegate" destination="BYZ-38-t0r" id="bwR-ec-TOB"/>
-                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="RqR-VY-igB"/>
-                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="CWM-qN-4zG"/>
-                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="bvn-4k-8g3"/>
-                    </connections>
-                </searchDisplayController>
-                <searchDisplayController id="gnW-qP-tGr">
-                    <connections>
-                        <outlet property="delegate" destination="BYZ-38-t0r" id="MFQ-55-tcl"/>
-                        <outlet property="searchBar" destination="XqV-OS-l7y" id="D3b-Rg-FoT"/>
-                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="qRQ-Cz-Zoa"/>
-                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="RAl-8M-Uob"/>
-                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="KhL-sd-3ib"/>
-                    </connections>
-                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="898" y="-676"/>
         </scene>
