@@ -25,7 +25,8 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.hideKeyboardWhenTappedAround()
+        self.navigationController?.view.hideKeyboardWhenTappedAround()
     }
     
     
@@ -72,8 +73,8 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
         
-        let imageUrl = self.items[indexPath.row]
-        cell.imageView.kf.setImage(with: imageUrl.url)
+        let item = self.items[indexPath.row]
+        cell.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"))
         return cell
     }
     
@@ -104,5 +105,9 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
         defer { collectionView.deselectItem(at: indexPath, animated: true) }
         guard indexPath.item < self.items.count else { return }
         self.performSegue(withIdentifier: "listToDetail", sender: nil)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        self.view.endEditing(true)
     }
 }
