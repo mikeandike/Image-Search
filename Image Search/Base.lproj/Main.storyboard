@@ -52,16 +52,38 @@
                                                         <constraint firstAttribute="width" secondItem="wU1-IS-VQi" secondAttribute="height" id="Hz7-Ad-Ke6"/>
                                                     </constraints>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="og4-wf-czP">
+                                                    <rect key="frame" x="0.0" y="148.5" width="173" height="14.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsI-kD-nV8">
+                                                            <rect key="frame" x="5" y="0.0" width="163" height="14.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="ZsI-kD-nV8" secondAttribute="bottom" id="d6r-Eq-MsF"/>
+                                                        <constraint firstItem="ZsI-kD-nV8" firstAttribute="leading" secondItem="og4-wf-czP" secondAttribute="leading" constant="5" id="jdI-6V-8Tj"/>
+                                                        <constraint firstItem="ZsI-kD-nV8" firstAttribute="top" secondItem="og4-wf-czP" secondAttribute="top" id="nnI-df-6pA"/>
+                                                        <constraint firstAttribute="trailing" secondItem="ZsI-kD-nV8" secondAttribute="trailing" constant="5" id="tyX-qz-NIp"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                         </view>
                                         <constraints>
+                                            <constraint firstItem="og4-wf-czP" firstAttribute="leading" secondItem="zaN-dj-Afk" secondAttribute="leading" id="GxR-i1-4Sw"/>
+                                            <constraint firstAttribute="trailing" secondItem="og4-wf-czP" secondAttribute="trailing" id="PZE-eU-4QY"/>
                                             <constraint firstItem="wU1-IS-VQi" firstAttribute="leading" secondItem="zaN-dj-Afk" secondAttribute="leading" id="QdD-Ci-gwC"/>
                                             <constraint firstAttribute="bottom" secondItem="wU1-IS-VQi" secondAttribute="bottom" id="bAE-bx-1SI"/>
                                             <constraint firstItem="wU1-IS-VQi" firstAttribute="top" secondItem="zaN-dj-Afk" secondAttribute="top" id="cB8-eW-6Rp"/>
                                             <constraint firstAttribute="trailing" secondItem="wU1-IS-VQi" secondAttribute="trailing" id="fas-50-8h6"/>
+                                            <constraint firstAttribute="bottom" secondItem="og4-wf-czP" secondAttribute="bottom" constant="10" id="o9B-ax-Iad"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="wU1-IS-VQi" id="1xb-rw-NfH"/>
+                                            <outlet property="textLabel" destination="ZsI-kD-nV8" id="7q8-mZ-psW"/>
                                         </connections>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MessageCollectionViewCell" id="1ed-pk-XJ8" customClass="MessageCollectionViewCell" customModule="Image_Search" customModuleProvider="target">

@@ -26,7 +26,7 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var reachedEnd: Bool = false
     var query: String?
     
-    var lastCharEntry: DispatchTime = DispatchTime.now()
+    var lastQuerySearch: DispatchTime = DispatchTime.now()
     
     var currentState: ListState = .noSearch
     
@@ -48,21 +48,16 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     //MARK: - Search Bar Methods
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard self.lastCharEntry + DispatchTimeInterval.milliseconds(250) < DispatchTime.now() else {
-            self.lastCharEntry = DispatchTime.now()
-            return true
-        }
-        self.lastCharEntry = DispatchTime.now()
-        
         guard let str = textField.text as NSString? else { return true }
-        let query = str.replacingCharacters(in: range, with: string)
+        let searchQuery = str.replacingCharacters(in: range, with: string)
+        self.query = searchQuery
+        self.lastQuerySearch = DispatchTime.now()
         
-        self.reloadList(items: [], state: .loading)
-        self.page = 0
-        self.reachedEnd = false
-        self.query = query
-        NetworkController.getImages(forTerm: query, page: 0) { [weak self] (items) in
-            self?.reloadList(items: items, state: items.count > 0 ? .loaded : .noResults)
+        let delay = DispatchTimeInterval.milliseconds(250)
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + delay) { [weak self] in
+            guard let lastQuerySearch = self?.lastQuerySearch, lastQuerySearch + delay <= DispatchTime.now() else { return }
+            self?.lastQuerySearch = DispatchTime.now()
+            self?.performSearch(searchQuery)
         }
         
         return true
@@ -71,6 +66,15 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func textFieldShouldClear(_ textField: UITextField) -> Bool {
         self.reloadList(items: [], state: .noSearch)
         return true
+    }
+    
+    private func performSearch(_ searchQuery: String) {
+        self.reloadList(items: [], state: .loading)
+        self.page = 0
+        self.reachedEnd = false
+        NetworkController.getImages(forTerm: searchQuery, page: 0) { [weak self] (items) in
+            self?.reloadList(items: items, state: items.count > 0 ? .loaded : .noResults)
+        }
     }
     
     private func reloadList(items: [ImgurItem], state: ListState) {
@@ -86,33 +90,22 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard self.currentState == .loaded else { return self.createMessageCell(for: indexPath) }
+        guard self.currentState == .loaded else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.reuseIdentifier, for: indexPath) as! MessageCollectionViewCell
+            
+            cell.setUp(currentState: self.currentState)
+            return cell
+        }
         
         if indexPath.item + 1 == self.items.count {
             self.loadNextPage()
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
-        
-        let item = self.items[indexPath.row]
-        cell.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"))
+        cell.setUp(item: self.items[indexPath.row])
         return cell
     }
     
-    private func createMessageCell(for indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.reuseIdentifier, for: indexPath) as! MessageCollectionViewCell
-        switch self.currentState {
-        case .loaded: break
-        case .loading:
-            cell.textLabel.text = "Loading..."
-        case .noResults:
-            cell.textLabel.text = "No results found. Please try a new search!"
-        case .noSearch:
-            cell.textLabel.text = "Enter something in the search bar above to search Imgur!"
-        }
-        
-        return cell
-    }
     
     private func loadNextPage() {
         guard let query = self.query, !self.reachedEnd else { return }
@@ -138,6 +131,11 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let length = self.currentState == .loaded ? (collectionView.frame.width / 3 ) - 1 : collectionView.frame.width
         
         return CGSize(width: length, height: length)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        guard let cell = cell as? ImageCollectionViewCell else { return }
+        cell.imageView.kf.cancelDownloadTask()
     }
     
     
