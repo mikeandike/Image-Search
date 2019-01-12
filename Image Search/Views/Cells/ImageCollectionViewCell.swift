@@ -23,4 +23,8 @@ class ImageCollectionViewCell: UICollectionViewCell, ReuseIdentifiable {
         self.textLabel.text = item.title
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.imageView.image = #imageLiteral(resourceName: "loading")
+    }
 }
