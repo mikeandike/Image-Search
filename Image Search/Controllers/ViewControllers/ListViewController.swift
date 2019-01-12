@@ -24,7 +24,7 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     var reachedEnd: Bool = false
     var query: String?
     
-    var currentState: ListState = .loading
+    var resultsLoaded: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +34,11 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     //MARK: - Collection View Methods
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch self.currentState {
-        case .loaded:
-            return self.items.count
-        case .loading:
-            return 1
-        }
+        return self.resultsLoaded ? self.items.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard self.currentState == .loaded else {
+        guard self.resultsLoaded else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MessageCollectionViewCell.reuseIdentifier, for: indexPath) as! MessageCollectionViewCell
             
             cell.setUp()
@@ -68,7 +63,7 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
                 self?.reachedEnd = true
                 return
             }
-            self?.currentState = .loaded
+            self?.resultsLoaded = true
             self?.items += items
             self?.collectionView.reloadData()
         }
@@ -82,7 +77,7 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if self.currentState == .loaded {
+        if self.resultsLoaded {
             let width = (collectionView.frame.width / 3 ) - 1
             return CGSize(width: width, height: width * 1.5)
         } else {
