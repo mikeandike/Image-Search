@@ -17,6 +17,7 @@ class ImageCollectionViewCell: UICollectionViewCell, ReuseIdentifiable {
         
         self.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"), options: [
             .processor(DownsamplingImageProcessor(size: self.imageView.frame.size)),
+            .processor(ResizingImageProcessor(referenceSize: self.imageView.frame.size, mode: .aspectFit)),
             .scaleFactor(UIScreen.main.scale),
             .cacheOriginalImage
             ])
