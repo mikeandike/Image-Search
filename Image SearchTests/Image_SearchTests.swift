@@ -11,38 +11,22 @@ import XCTest
 
 class Image_SearchTests: XCTestCase {
 
-    override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
     func testImgurBasicItem() {
-        guard let item = ImgurItem(["images" : [["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"]]]) else { XCTFail(); return }
-        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/5zztrK3.jpg")
+        guard let item = MovieItem(["poster_path" : "/9hE6vesQoSREyvJha9z0g5OryHH.jpg"]) else { XCTFail(); return }
+        XCTAssertEqual(item.url.absoluteString,"https://image.tmdb.org/t/p/w500/9hE6vesQoSREyvJha9z0g5OryHH.jpg")
         XCTAssertNil(item.title)
     }
     
     func testImgurCompleteItem() {
-        guard let item = ImgurItem(["images" : [["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"]], "title" : "image title"]) else { XCTFail(); return }
-        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/5zztrK3.jpg")
+        guard let item = MovieItem(["poster_path" : "/9hE6vesQoSREyvJha9z0g5OryHH.jpg", "title" : "image title"]) else { XCTFail(); return }
+        XCTAssertEqual(item.url.absoluteString,"https://image.tmdb.org/t/p/w500/9hE6vesQoSREyvJha9z0g5OryHH.jpg")
         XCTAssertEqual(item.title, "image title")
     }
     
-    func testImgurEdgeCases() {
-        XCTAssertNil(ImgurItem(["images" : [["type" : "image/jpeg", "link" : " "]]]))
-        XCTAssertNil(ImgurItem(["images" : [["type" : "image/gif", "link" : "https://i.imgur.com/5zztrK3.jpg"]]]))
-        XCTAssertNil(ImgurItem(["images" : ["type" : "image/png", "link" : "https://i.imgur.com/5zztrK3.jpg"]]))
-        XCTAssertNil(ImgurItem(["images" : [[ : ]]]))
-        XCTAssertNil(ImgurItem([ : ]))
-        
-        guard let item = ImgurItem(["images" : [["type" : "image/png", "link" : "https://i.imgur.com/oHcBq.png"],
-                                                ["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"],
-                                                ["type" : "image/png", "link" : "https://i.imgur.com/FssYN.png"]], "title" : "some title"]) else { XCTFail(); return }
-        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/oHcBq.png")
-        XCTAssertEqual(item.title, "some title")
+    func testImgurNils() {
+        XCTAssertNil(MovieItem(["poster_path" : "no path"]))
+        XCTAssertNil(MovieItem(["title" : "image title"]))
+        XCTAssertNil(MovieItem([ : ]))
     }
 
 }

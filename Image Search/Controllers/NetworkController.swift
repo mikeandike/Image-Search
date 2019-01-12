@@ -13,10 +13,6 @@ import Alamofire
 class NetworkController {
     static let baseURL = "http://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22&page="
     static let apiKey = "64b6f3a69e5717b13ed8a56fe4417e71"
-//    static let headers: HTTPHeaders = [
-//        "Authorization": "Client-ID 64b6f3a69e5717b13ed8a56fe4417e71"
-//    ]
-    
     
     static func getImages(page: Int, result: @escaping (_ items: [MovieItem], _ page: Int, _ totalPages: Int) -> ()) {
                 let requestURL = self.baseURL + "\(page)&api_key=" + apiKey

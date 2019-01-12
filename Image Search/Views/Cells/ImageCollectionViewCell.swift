@@ -15,11 +15,7 @@ class ImageCollectionViewCell: UICollectionViewCell, ReuseIdentifiable {
     
     func setUp(item: MovieItem) {
         
-        self.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"), options: [
-            .processor(DownsamplingImageProcessor(size: self.imageView.frame.size)),
-            .scaleFactor(UIScreen.main.scale),
-            .cacheOriginalImage
-            ])
+        self.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"))
         self.textLabel.text = item.title
     }
     
