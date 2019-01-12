@@ -34,12 +34,15 @@ class Image_SearchTests: XCTestCase {
     func testImgurEdgeCases() {
         XCTAssertNil(ImgurItem(["images" : [["type" : "image/jpeg", "link" : " "]]]))
         XCTAssertNil(ImgurItem(["images" : [["type" : "image/gif", "link" : "https://i.imgur.com/5zztrK3.jpg"]]]))
+        XCTAssertNil(ImgurItem(["images" : ["type" : "image/png", "link" : "https://i.imgur.com/5zztrK3.jpg"]]))
+        XCTAssertNil(ImgurItem(["images" : [[ : ]]]))
+        XCTAssertNil(ImgurItem([ : ]))
         
         guard let item = ImgurItem(["images" : [["type" : "image/png", "link" : "https://i.imgur.com/oHcBq.png"],
                                                 ["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"],
-                                                ["type" : "image/png", "link" : "https://i.imgur.com/FssYN.png"]]]) else { XCTFail(); return }
+                                                ["type" : "image/png", "link" : "https://i.imgur.com/FssYN.png"]], "title" : "some title"]) else { XCTFail(); return }
         XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/oHcBq.png")
-        XCTAssertNil(item.title)
+        XCTAssertEqual(item.title, "some title")
     }
 
 }
