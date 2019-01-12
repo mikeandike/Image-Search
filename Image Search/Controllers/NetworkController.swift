@@ -11,21 +11,25 @@ import Alamofire
 
 
 class NetworkController {
-    static let baseURL = "https://api.imgur.com/3/gallery/search/time/"
-    static let headers: HTTPHeaders = [
-        "Authorization": "Client-ID 126701cd8332f32"
-    ]
+    static let baseURL = "http://api.themoviedb.org/3/discover/movie?primary_release_date.gte=2014-09-15&primary_release_date.lte=2014-10-22&page="
+    static let apiKey = "64b6f3a69e5717b13ed8a56fe4417e71"
+//    static let headers: HTTPHeaders = [
+//        "Authorization": "Client-ID 64b6f3a69e5717b13ed8a56fe4417e71"
+//    ]
     
-    static func getImages(forTerm queryString: String, page: Int, result: @escaping (_ items: [ImgurItem]) -> ()) {
-        let cleanQueryString = queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? queryString
-        let requestURL = self.baseURL + "\(page)?q=" + cleanQueryString
+    
+    static func getImages(page: Int, result: @escaping (_ items: [MovieItem], _ page: Int, _ totalPages: Int) -> ()) {
+                let requestURL = self.baseURL + "\(page)&api_key=" + apiKey
         
-        Alamofire.request(requestURL, headers: self.headers).responseJSON { (response) in
-            guard let json = response.result.value as? [String : Any], let data = json["data"] as? [[String : Any]] else { result([]); return }
+        Alamofire.request(requestURL).responseJSON { (response) in
+            guard let json = response.result.value as? [String : Any], let page = json["page"] as? Int, let totalPages = json["total_pages"] as? Int else { result([], 0, 0); return }
             
-            let results: [ImgurItem] = data.compactMap({ return ImgurItem($0) })
+            var results: [MovieItem] = []
+            if let moviesDicts = json["results"] as? [[String : Any]] {
+                results = moviesDicts.compactMap({ MovieItem($0) })
+            }
             
-            result(results)
+            result(results, page, totalPages)
         }
     }
 

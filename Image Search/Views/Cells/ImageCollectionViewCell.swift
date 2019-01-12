@@ -13,7 +13,7 @@ class ImageCollectionViewCell: UICollectionViewCell, ReuseIdentifiable {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textLabel: UILabel!
     
-    func setUp(item: ImgurItem) {
+    func setUp(item: MovieItem) {
         
         self.imageView.kf.setImage(with: item.url, placeholder: #imageLiteral(resourceName: "loading"), options: [
             .processor(DownsamplingImageProcessor(size: self.imageView.frame.size)),
@@ -21,6 +21,12 @@ class ImageCollectionViewCell: UICollectionViewCell, ReuseIdentifiable {
             .cacheOriginalImage
             ])
         self.textLabel.text = item.title
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        self.imageView.image = #imageLiteral(resourceName: "loading")
     }
     
 }

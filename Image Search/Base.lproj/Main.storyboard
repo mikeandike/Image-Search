@@ -17,20 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Search" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="rTa-d4-2pR">
-                                <rect key="frame" x="0.0" y="64" width="375" height="28"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="28" id="wI8-YE-m0h"/>
-                                </constraints>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="HiraginoSans-W6" family="Hiragino Sans" pointSize="20"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="5ub-Gb-qkn"/>
-                                </connections>
-                            </textField>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7D1-sN-3ac">
-                                <rect key="frame" x="0.0" y="92" width="375" height="575"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="FNo-m2-YSu">
                                     <size key="itemSize" width="173" height="173"/>
@@ -122,11 +110,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="7D1-sN-3ac" secondAttribute="bottom" id="5ja-wX-6zi"/>
-                            <constraint firstItem="7D1-sN-3ac" firstAttribute="top" secondItem="rTa-d4-2pR" secondAttribute="bottom" id="biT-0l-6yf"/>
-                            <constraint firstItem="rTa-d4-2pR" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dy7-cX-0x0"/>
-                            <constraint firstItem="rTa-d4-2pR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jvH-W3-2Mw"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="rTa-d4-2pR" secondAttribute="trailing" id="lVi-hK-LHV"/>
                             <constraint firstAttribute="trailing" secondItem="7D1-sN-3ac" secondAttribute="trailing" id="lhD-9C-orb"/>
+                            <constraint firstItem="7D1-sN-3ac" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="mRs-iw-Pr8"/>
                             <constraint firstItem="7D1-sN-3ac" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="pcZ-n5-tvk"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -134,41 +119,11 @@
                     <navigationItem key="navigationItem" id="rX4-5K-8SY"/>
                     <connections>
                         <outlet property="collectionView" destination="7D1-sN-3ac" id="lBe-Q4-TS7"/>
-                        <segue destination="SH4-r2-sqC" kind="show" identifier="listToDetail" id="oLa-YF-A6U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="898" y="-676"/>
-        </scene>
-        <!--Detail View Controller-->
-        <scene sceneID="Kqc-l6-dnH">
-            <objects>
-                <viewController id="SH4-r2-sqC" customClass="DetailViewController" customModule="Image_Search" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lOS-Ce-jO2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NJr-8F-ZHx">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="NJr-8F-ZHx" secondAttribute="bottom" id="cmA-Zg-1vA"/>
-                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="top" secondItem="lOS-Ce-jO2" secondAttribute="top" constant="64" id="r8O-n1-mFW"/>
-                            <constraint firstAttribute="trailing" secondItem="NJr-8F-ZHx" secondAttribute="trailing" id="sNR-YQ-EFp"/>
-                            <constraint firstItem="NJr-8F-ZHx" firstAttribute="leading" secondItem="lOS-Ce-jO2" secondAttribute="leading" id="uTV-Em-dhe"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ubh-Mt-8ZH"/>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="NJr-8F-ZHx" id="yYe-hw-HJx"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eac-43-3u2" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1639" y="-676"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="BUI-jB-gOF">
