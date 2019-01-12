@@ -9,11 +9,6 @@
 import UIKit
 import Kingfisher
 
-enum ListState {
-    case loaded
-    case loading
-}
-
 class ListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UICollectionViewDataSourcePrefetching {
     
     @IBOutlet weak var collectionView: UICollectionView!
