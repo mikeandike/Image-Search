@@ -82,9 +82,12 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let length = self.currentState == .loaded ? (collectionView.frame.width / 3 ) - 1 : collectionView.frame.width
-        
-        return CGSize(width: length, height: length)
+        if self.currentState == .loaded {
+            let width = (collectionView.frame.width / 3 ) - 1
+            return CGSize(width: width, height: width * 1.5)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.width)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
