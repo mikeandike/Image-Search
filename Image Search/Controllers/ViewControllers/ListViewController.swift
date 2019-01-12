@@ -16,17 +16,21 @@ enum ListState {
     case noResults
 }
 
-class ListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate {
+class ListViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UITextFieldDelegate, UICollectionViewDataSourcePrefetching {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
     var items: [ImgurItem] = []
+    var page: Int = 0
+    var reachedEnd: Bool = false
+    var query: String?
     var currentState: ListState = .noSearch
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.hideKeyboardWhenTappedAround()
         self.navigationController?.view.hideKeyboardWhenTappedAround()
+        self.collectionView.prefetchDataSource = self
     }
     
     
@@ -44,7 +48,10 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
         let query = str.replacingCharacters(in: range, with: string)
         
         self.reloadList(items: [], state: .loading)
-        NetworkController.getImages(forTerm: query) { [weak self] (items) in
+        self.page = 0
+        self.reachedEnd = false
+        self.query = query
+        NetworkController.getImages(forTerm: query, page: 0) { [weak self] (items) in
             self?.reloadList(items: items, state: items.count > 0 ? .loaded : .noResults)
         }
         
@@ -71,6 +78,10 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard self.currentState == .loaded else { return self.createMessageCell(for: indexPath) }
         
+        if indexPath.item + 1 == self.items.count {
+            self.loadNextPage()
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCollectionViewCell.reuseIdentifier, for: indexPath) as! ImageCollectionViewCell
         
         let item = self.items[indexPath.row]
@@ -92,6 +103,25 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
         
         return cell
     }
+    
+    private func loadNextPage() {
+        guard let query = self.query, !self.reachedEnd else { return }
+        self.page += 1
+        NetworkController.getImages(forTerm: query, page: self.page) { [weak self] (items) in
+            guard items.count > 0 else {
+                self?.reachedEnd = true
+                return
+            }
+            self?.items += items
+            self?.collectionView.reloadData()
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        let imgPaths = indexPaths.compactMap({ self.items[safe: $0.item]?.url })
+        ImagePrefetcher(urls: imgPaths).start()
+    }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
@@ -110,4 +140,7 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.view.endEditing(true)
     }
+    
+ 
+    
 }

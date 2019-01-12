@@ -16,9 +16,9 @@ class NetworkController {
         "Authorization": "Client-ID 126701cd8332f32"
     ]
     
-    static func getImages(forTerm queryString: String, result: @escaping (_ items: [ImgurItem]) -> ()) {
+    static func getImages(forTerm queryString: String, page: Int, result: @escaping (_ items: [ImgurItem]) -> ()) {
         let cleanQueryString = queryString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? queryString
-        let requestURL = self.baseURL + "1" + "?q=" + cleanQueryString
+        let requestURL = self.baseURL + "\(page)?q=" + cleanQueryString
         
         Alamofire.request(requestURL, headers: self.headers).responseJSON { (response) in
             guard let json = response.result.value as? [String : Any], let data = json["data"] as? [[String : Any]] else { result([]); return }
