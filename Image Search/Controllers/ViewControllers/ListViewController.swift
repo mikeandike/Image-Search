@@ -21,9 +21,13 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet weak var collectionView: UICollectionView!
     
     var items: [ImgurItem] = []
+    
     var page: Int = 0
     var reachedEnd: Bool = false
     var query: String?
+    
+    var lastCharEntry: DispatchTime = DispatchTime.now()
+    
     var currentState: ListState = .noSearch
     
     override func viewDidLoad() {
@@ -44,6 +48,12 @@ class ListViewController: UIViewController, UICollectionViewDelegate, UICollecti
     
     //MARK: - Search Bar Methods
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard self.lastCharEntry + DispatchTimeInterval.milliseconds(250) < DispatchTime.now() else {
+            self.lastCharEntry = DispatchTime.now()
+            return true
+        }
+        self.lastCharEntry = DispatchTime.now()
+        
         guard let str = textField.text as NSString? else { return true }
         let query = str.replacingCharacters(in: range, with: string)
         
