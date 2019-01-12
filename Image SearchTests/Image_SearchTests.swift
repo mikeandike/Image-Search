@@ -19,16 +19,27 @@ class Image_SearchTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testImgurBasicItem() {
+        guard let item = ImgurItem(["images" : [["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"]]]) else { XCTFail(); return }
+        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/5zztrK3.jpg")
+        XCTAssertNil(item.title)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testImgurCompleteItem() {
+        guard let item = ImgurItem(["images" : [["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"]], "title" : "image title"]) else { XCTFail(); return }
+        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/5zztrK3.jpg")
+        XCTAssertEqual(item.title, "image title")
+    }
+    
+    func testImgurEdgeCases() {
+        XCTAssertNil(ImgurItem(["images" : [["type" : "image/jpeg", "link" : " "]]]))
+        XCTAssertNil(ImgurItem(["images" : [["type" : "image/gif", "link" : "https://i.imgur.com/5zztrK3.jpg"]]]))
+        
+        guard let item = ImgurItem(["images" : [["type" : "image/png", "link" : "https://i.imgur.com/oHcBq.png"],
+                                                ["type" : "image/jpeg", "link" : "https://i.imgur.com/5zztrK3.jpg"],
+                                                ["type" : "image/png", "link" : "https://i.imgur.com/FssYN.png"]]]) else { XCTFail(); return }
+        XCTAssertEqual(item.url.absoluteString,"https://i.imgur.com/oHcBq.png")
+        XCTAssertNil(item.title)
     }
 
 }
